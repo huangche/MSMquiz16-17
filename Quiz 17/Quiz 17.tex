@@ -1,0 +1,209 @@
+% Type of the document
+\documentclass{beamer}
+
+% elementary packages:
+\usepackage{graphicx}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{mathrsfs}
+\usepackage{url}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{booktabs}
+
+% additional packages
+\usepackage{bbm}
+
+% packages supplied with ise-beamer:
+\usepackage{cooltooltips}
+\usepackage{colordef}
+\usepackage{beamerdefs}
+\usepackage{lvblisting}
+
+% Change the pictures here:
+% logobig and logosmall are the internal names for the pictures: do not modify them. 
+% Pictures must be supplied as JPEG, PNG or, to be preferred, PDF
+\pgfdeclareimage[height=2cm]{logobig}{hulogo}
+% Supply the correct logo for your class and change the file name to "logo". The logo will appear in the lower
+% right corner:
+\pgfdeclareimage[height=0.7cm]{logosmall}{Figures/LOB_Logo}
+
+% Title page outline:
+% use this number to modify the scaling of the headline on title page
+\renewcommand{\titlescale}{1.0}
+% the title page has two columns, the following two values determine the percentage each one should get
+\renewcommand{\titlescale}{1.0}
+\renewcommand{\leftcol}{0.6}
+
+% Define the title.Don't forget to insert an abbreviation instead 
+% of "title for footer". It will appear in the lower left corner:
+\title{Selected Topics of Mathematical Statistics: Quiz 17}
+% Define the authors:
+\authora{Xiang Gao} % a-c
+\authorb{}
+\authorc{}
+
+% Define any internet addresses, if you want to display them on the title page:
+\def\linka{http://lvb.wiwi.hu-berlin.de}
+\def\linkb{}
+\def\linkc{}
+
+% Define the institute:
+\institute{Ladislaus von Bortkiewicz Chair of Statistics \\
+Humboldt--Universit{\"a}t zu Berlin \\}
+
+% Comment the following command, if you don't want, that the pdf file starts in full screen mode:
+\hypersetup{pdfpagemode=FullScreen}
+
+%Start of the document
+\begin{document}
+
+% create the title slide, layout controlled in beamerdefs.sty and the foregoing specifications
+\frame[plain]{
+\titlepage
+}
+
+% The titles of the different sections of you talk, can be included via the \section command. The title will be displayed in the upper left corner. To indicate a new section, repeat the \section command with, of course, another section title
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Solutions to quizzes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% (A numbering of the slides can be useful for corrections, especially if you are
+% dealing with large tex-files)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{Quiz 17: Question}
+
+\textbf{Proof of Theorem 37}\\
+For each  
+\begin{math}
+	-\infty<x<\infty
+\end{math}
+,
+\begin{align*}
+	\sqrt{n}\lbrace F_n(x)-F(x)\rbrace\overset{\mathcal{L}}{\to}
+		N[0,F(x)\lbrace 1-F(x)\rbrace]
+\end{align*}
+
+where
+\begin{math}
+	F_n(x)=\frac{1}{n} \sum_{i=1}^n \textbf{I} (X_i \leqslant x)
+\end{math}
+is the empirical distribution function of an $iid$ sequence $\lbrace X_i\rbrace$ with cdf $F$.
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{Quiz 17: Solution}
+\begin{itemize}
+\item Set  
+\begin{math}
+	Yi:= \textbf{I} (X_i \leqslant x)
+\end{math}
+,
+\begin{math}
+	i \in \mathbb{N}
+\end{math}
+, so that
+\begin{math}
+	\bar{Y_n}
+		=\frac{1}{n}\sum_{i=1}^n Y_i 
+		=\frac{1}{n}\sum_{i=1}^n \textbf{I}(X_i \leqslant x)=F_n(x)
+\end{math}
+.\\
+\begin{math}
+	\lbrace Y_i \rbrace 
+\end{math}
+is therefore also an $iid$ sequence, since $\lbrace X_i \rbrace$ is $iid$ and indicate function is measurable, and
+\end{itemize}
+\begin{align*}
+	E[Y_i]
+		=E[\textbf{I}(X_i \leqslant x)]
+		=P(X_i \leqslant x)=F(x)
+\end{align*}
+\begin{align*}
+	Var(Y_i)
+		&=E[\underbrace{(\textbf{I}(X_i \leqslant x))^2}_{\textbf{I}(X_i \leqslant x)}]-(E[\textbf{I}(X_i \leqslant x)])^2\\
+		&=F(x)-(F(x))^2=F(x)(1-F(x))
+\end{align*}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{Quiz 17: Solution}
+\begin{enumerate}[(i)]
+\item If 
+\begin{math}
+	F(x)\in (0, 1)
+\end{math}
+, we can get from Theorem 31 that
+\begin{align*}
+	\sqrt{n} (\bar{Y_n}-F(x))
+		= \sqrt{n}(F_n(x)-F(x)) \overset{\mathcal{L}}{\to} N(0,F(x)(1-F(x))
+\end{align*}
+
+\end{enumerate}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{Quiz 17: Solution}
+\begin{enumerate}[(ii)]
+\item If 
+\begin{math}
+	F(x)=P(X_i \leqslant x)=0
+\end{math}
+, so that 
+\begin{math}
+	Y_i=\textbf{I} (X_i \leqslant x)=0
+\end{math}
+ a.s. That means %$Y_i \to 0$ a.s., and that 
+\begin{align*}
+	F_n(x)=\frac{1}{n}\sum_{i=1}^n \textbf{I}(X_i \leqslant x)=0 \quad a.s.
+\end{align*}
+So that 
+\begin{align*}
+	\sqrt{n}(F_n(x)-F(x)) \overset{a.s.}{\to} 0
+\end{align*}
+and thus
+\begin{align*}
+	\sqrt{n}(F_n(x)-F(x)) \overset{\mathcal{L}}{\to} 0
+\end{align*}
+\end{enumerate}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{Quiz 17: Solution}
+\begin{enumerate}[(iii)]
+\item If 
+\begin{math}
+	F(x)=P(X_i \leqslant x)=1
+\end{math}
+, so that 
+\begin{math}
+	Y_i=\textbf{I} (X_i \leqslant x)=1
+\end{math}
+a.s. That means %$Y_i \to 1$ a.s., and that 
+\begin{align*}
+	F_n(x)=\frac{1}{n}\sum_{i=1}^n \textbf{I}(X_i \leqslant x)=\frac{n}{n}=1 \quad a.s.
+\end{align*}
+So that 
+\begin{align*}
+	\sqrt{n}(F_n(x)-F(x)) \overset{a.s.}{\to} 0
+\end{align*}
+and thus
+\begin{align*}
+	\sqrt{n}(F_n(x)-F(x)) \overset{\mathcal{L}}{\to} 0
+\end{align*}
+\end{enumerate}
+}
+
+% Define the end of the document:
+\end{document}
