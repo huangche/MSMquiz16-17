@@ -1,0 +1,210 @@
+% Type of the document
+\documentclass{beamer}
+
+% elementary packages:
+\usepackage{graphicx}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{mathrsfs}
+\usepackage{url}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{ragged2e}
+
+% additional packages
+\usepackage{bbm}
+
+% packages supplied with ise-beamer:
+\usepackage{cooltooltips}
+\usepackage{colordef}
+\usepackage{beamerdefs}
+\usepackage{lvblisting}
+
+% Change the pictures here:
+% logobig and logosmall are the internal names for the pictures: do not modify them. 
+% Pictures must be supplied as JPEG, PNG or, to be preferred, PDF
+\pgfdeclareimage[height=2cm]{logobig}{hulogo}
+% Supply the correct logo for your class and change the file name to "logo". The logo will appear in the lower
+% right corner:
+\pgfdeclareimage[height=0.7cm]{logosmall}{Figures/logo.JPG}
+
+% Title page outline:
+% use this number to modify the scaling of the headline on title page
+\renewcommand{\titlescale}{1.0}
+% the title page has two columns, the following two values determine the percentage each one should get
+\renewcommand{\titlescale}{1.0}
+\renewcommand{\leftcol}{0.6}
+
+% Define the title.Don't forget to insert an abbreviation instead 
+% of "title for footer". It will appear in the lower left corner:
+\title[quiz9]{Quiz 8 of Selected Topics of Mathematical Statistics Seminar}
+% Define the authors:
+\authora{SPILAK Bruno} % a-b
+\authorb{}
+\authorc{}
+
+% Define any internet addresses, if you want to display them on the title page:
+\def\linka{http://lvb.wiwi.hu-berlin.de}
+\def\linkb{}
+\def\linkc{}
+% Define the institute:
+\institute{Ladislaus von Bortkiewicz Chair of Statistics \\
+Humboldt--Universit{\"a}t zu Berlin \\}
+
+% Comment the following command, if you don't want, that the pdf file starts in full screen mode:
+%\hypersetup{pdfpagemode=FullScreen}
+
+%Start of the document
+\begin{document}
+
+% create the title slide, layout controlled in beamerdefs.sty and the foregoing specifications
+\frame[plain]{
+\titlepage
+}
+
+\section{}
+%1.1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame{
+\frametitle{Quiz}
+\justifying
+
+{\color{orange} Let $ (X_i)_{i=1}^{n} $ be i.i.d  random variables with distribution $\mathcal{N}(\mu,1)$, find $ \lim\limits_{n\rightarrow \infty} \mathbb{P}(\sqrt[]{n}(\overline{X_n} - \mu) \leqslant  x)$  where $\overline{X_n}=\frac{1}{n}\sum_{i=1}^{n}X_i $
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+%1.2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\frame{
+\frametitle{First property of the characteristic function}
+\justifying
+
+
+Let $\varphi_{X_i}$ be the characteristic function of the random variable $X_i$
+.We know that $X_i \sim \mathcal{N}(\mu,1)$ we have :
+
+
+{\color{blue}
+ 
+\begin{center} 
+$\varphi_{X_i}(t) = \exp(\mu i t - \frac{t^2}{2}) $
+\end{center}
+
+
+
+}
+
+let $S_n$ = $\sum_{j=1}^{n}X_j $ we known that $\{X_i\}$ is a iid family of random variables, so with the property of the characteristic function and because $\{X_i\}$ are independents, we have:
+
+
+{\color{blue}
+ 
+\begin{equation*} 
+\varphi_{S_n}(t) = \varphi_{\displaystyle \sum_{j=1}^{n}X_j}(t) = \prod_{j=1}^{n}\varphi_{X_j}(t) =(\varphi_{X_1}(t))^n = \exp(i n \mu t - \frac{nt^2}{2})
+\end{equation*}
+
+
+
+}
+
+
+}
+
+%1.3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame{
+\frametitle{Second property of the characteristic
+function}
+\justifying
+
+We know also that for any (a, b) $\in \mathbb{R}^2 $ , $\varphi_{aX+b}(t)=\varphi_{X}(at)e^{itb}$. So with $a = \frac{1}{\sqrt[]{n}}$ and $b=\sqrt[]{n}\mu$ we can derive the characteristic function
+of the random variable $\sqrt[]{n}(\bar{X_n} - \mu)=aS_n - b $
+
+
+{\color{blue}
+\begin{equation*}
+\begin{split}
+\varphi_{\sqrt[]{n}(\bar{X_n} - \mu)}(t) = \varphi_{aS_n - b}(t) & = \varphi_{S_n}(\frac{t}{\sqrt[]{n}})e^{-i\sqrt[]{n}\mu t} \\
+&= exp(i \sqrt[]{n}\mu t - \frac{nt^2}{2n}- i \sqrt[]{n}\mu t ) \\
+&= e^{- \frac{t^2}{2}}=\phi(t)
+\end{split}
+\end{equation*}
+}
+where $\varphi$ is the characteristic function of the reduced-centered normal
+distribution.
+
+
+
+}
+
+%1.4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{Conclusion}
+\justifying
+
+
+For any n $\in \mathbb{N}^*$ 
+
+{\color{blue}
+\begin{center} 
+$\varphi_{\sqrt[]{n}(\bar{X} - \mu)}(t)= \varphi(t)$
+\end{center}
+}
+
+hence for any t $\in \mathbb{R}$ 
+
+{\color{blue}
+\begin{center}
+$\lim\limits_{n\rightarrow \infty} \varphi_{\sqrt[]{n}(\overline{X} - \mu)}(t)= \varphi(t)$
+\end{center}
+}
+
+Thanks to theorem 17, for any t $\in \mathbb{R}$ we have :
+
+{\color{blue}
+\begin{center} 
+$\lim\limits_{n\rightarrow \infty}\mathbb{P}(\sqrt[]{n}(\bar{X} - \mu) \leqslant   x)= \Phi(x)$
+\end{center}
+}
+
+
+
+where $\Phi$ is the cdf of the reduced-centered normal distribution.
+
+
+
+
+}
+
+
+
+
+
+
+\end{document}
