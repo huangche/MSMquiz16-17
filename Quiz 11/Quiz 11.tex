@@ -1,0 +1,252 @@
+\documentclass{beamer}
+
+\usepackage{graphicx}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{mathrsfs}
+\usepackage{url}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{bbm}
+\usepackage{cooltooltips}
+\usepackage{colordef}
+\usepackage{beamerdefs}
+\usepackage{lvblisting}
+\usepackage{amsfonts}
+
+\pgfdeclareimage[height=3.5cm]{logobig}{hucaselogo}
+\pgfdeclareimage[height=0.7cm]{logosmall}{Figures/mef}
+
+\renewcommand{\titlescale}{1.0}
+\renewcommand{\titlescale}{1.0}
+\renewcommand{\leftcol}{0.6}
+
+
+\title[]{Quiz 11: define an exponential family and show that the parameters are asymptotically normal} %%how to make it narrow??
+
+
+\authora{Daria Fitisova}
+\authorb{}
+\authorc{}
+
+\def\linka{http://lvb.wiwi.hu-berlin.de}
+\def\linkb{http://case.hu-berlin.de}
+\def\linkc{}
+
+\institute{Ladislaus von Bortkiewicz Chair of Statistics \\
+C.A.S.E. -- Center for Applied Statistics\\
+and Economics\\
+Humboldt--Universität zu Berlin \\}
+
+\hypersetup{pdfpagemode=FullScreen}
+
+\begin{document}
+
+% 0-1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame[plain]{
+
+\titlepage
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exponential family}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 1-1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{What is exponential family?}
+%is a set of probability distributions of a certain form%
+For a vector parameter ${\theta}={({\theta}_{1},\ldots, {\theta}_{d})}^{T}$, a family of distributions is said to belong to the exponential family, if the probability density function (or PMF) can be written as \begin{displaymath}
+f(x\mid\theta)=h(x)exp\Big\{ \sum_{i=1}^{s}{\eta}_{i}(\theta){t}_{i}(x)-a(\theta)\Big\}
+\end{displaymath}
+or more compact
+\begin{displaymath}
+f(x\mid\theta)=h(x)exp\small\{ \eta{(\theta)}^{T}t(x)-a(\theta) \small\} .
+\end{displaymath}
+Here, $h(x)$ is the $base$ $measure$, $\eta$($\theta$) is called the $natural$ $parameter$, $t(x)$ is the $sufficient$ $statistic$ and $a(\theta)$ is the $log-partition$ or $log-normalizer$.
+}
+
+% 1-2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{Example: Poisson distribution}
+\begin{displaymath}
+\color{green}
+P(x\mid\theta)=h(x)exp\small\{ \eta{(\theta)}^{T}T(x)-a(\theta) \small\}
+\end{displaymath}
+\begin{displaymath}
+P(x\mid\lambda)=\frac{{\lambda}^{x}{e}^{-\lambda}}{x!}
+={(x!)}^{-1}exp(-\lambda)exp[xlog(\lambda)]
+\end{displaymath}
+\begin{displaymath}
+={(x!)}^{-1}exp\small\{ xlog\lambda-\lambda \small\}, 
+\end{displaymath}
+i.e. belonging to the exponential family with
+\begin{itemize}
+\item[-] $\theta=log\lambda$
+\item[-] $h(x)={(x!)}^{-1}$
+\item[-] $t(x)=x$
+\item[-] $a(\theta)=\lambda={e}^{\theta}$
+\end{itemize}
+%which is a 1-parameter exponential family with $\theta=log\lambda$, $h(x)={(x!)}^{-1}$, $t(x)=x$ and $a(\theta)=\lambda={e}^{\theta}$%
+}
+
+% 1-3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{Distributions in exponential family}
+\begin{itemize}
+\item Gaussian: $\mathbb{R}^{p}$\\
+\item Bernoulli: binary \{0,1\} \\
+\item Binomial: counts of success/failure\\
+\item Multinomial: categorical\\
+\item Exponential: $\mathbb{R}^{+}$\\
+\item Poisson: $\mathbb{N}^{+}$\\
+\item Gamma: $\mathbb{R}^{+}$\\
+\item  ... \\
+\end{itemize}
+}
+
+
+% 1-4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{Motivation}
+\begin{itemize}
+\item provides a general framework for selecting a possible alternative parametrisation of the distribution
+\begin{itemize}
+\item GLMs
+\item Bayesian estimates in machine learning
+\end{itemize}
+\item a number of important statistics can be derived at one stroke within the framework of exponential family
+\end{itemize}
+}
+
+% 1-5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The mean and variance of probability distributions are defined as integrals with respect to the distribution. Thus it may come as a surprise that the mean and variance of distributions in the exponential family can be obtained by calculating derivatives. the mean can be obtained by computing a first deriva- tive of the cumulant function A(?) and the variance can be obtained by computing second derivatives of A(?)%
+\frame{
+\frametitle{Moments of exponential family}
+\begin{eqnarray*}
+\frac{\partial{a(\theta)}}{\partial{\theta}} & = & \frac{d}{d\theta} \Big\{ log(\int exp \small\{ {\theta}^{T}t(x) \small\} h(x)dx \Big\} \\
+						       & = & \frac{\frac{d}{d\theta}\int exp \small\{ {\theta}^{T} t(x) \small\} h(x)dx}{\int exp \small\{ {\theta}^{T}t(x) \small\} h(x)dx} \\ 
+                                                         & = & \frac{t(x)h(x)exp \small\{ {\theta}^{T}t(x) \small\} dx}{\int exp \small\{ {\theta}^{T}t(x) \small\} h(x)dx} \\ 
+                                                         & = & \frac{t(x)exp \small\{ {\theta}^{T}t(x) \small\} h(x)dx}{ exp \small\{ -a(\theta) \small\} } \\
+                                                        & = & \int t(x)exp \small\{ {\theta}^{T}t(x)-a(\theta) \small\} h(x)dx \\
+                                                         & = & \mathbb{E}[t(x)] \\
+\end{eqnarray*}
+}
+% 1-6
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\frame{
+\frametitle{Moments of exponential family}
+Likewise, it can be shown that:
+\begin{eqnarray*}
+\frac{\partial^2{a(\theta)}}{\partial{\theta}^2} = Var(t(x)) = \mathbb{E}[t(x)^2]- \mathbb{E}[t(x)]^2\\
+\end{eqnarray*}
+}
+
+
+% 1-7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{Example: moments of Poisson distribution}
+\begin{itemize}
+\item  $\theta$=log($\lambda$): canonical parameter
+\item a($\theta$)=exp($\theta$) %log-normalizer%
+\item $\mathbb{E}$[Y]=a'($\theta$)
+\item Var[Y]=a''($\theta$)
+\end{itemize}
+wherefrom follows that for Poisson distribution yields $\mathbb{E}$[Y]=$\lambda$, Var[Y]=$\lambda$
+}
+
+% 1-7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{Overview of some distributions in exponential family}
+\begin{figure}
+  \includegraphics[width=\linewidth]{Figures/distribs}
+\end{figure}
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Asymptotic normality of parameters}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2-1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{MLE of the mean parameter in exponential family distributions}
+\begin{displaymath}
+\ell(\theta\mid D)= log \Big({\prod}^{N}_{n=1}h({x}_{n})\Big) + {\theta}^{T}\Big({\sum}^{N}_{n=1}t({x}_{n})\Big)-Na(\theta).
+\end{displaymath}
+Taking the gradient with respect to $\theta$ gives:
+\begin{displaymath}
+{\nabla}_{\theta}\ell={\sum}^{N}_{n=1}t({x}_{n})-N{\nabla}_{\theta}a(\theta),
+\end{displaymath}
+and setting to zero gives:
+\begin{displaymath}
+{\nabla}_{\theta}a(\hat{\theta})=\frac{1}{N}{\sum}_{n=1}^{N}t({x}_{n}).
+\end{displaymath}
+Finally, defining $\mu$:=$\mathbb{E}$[t(x)], we obtain:
+\begin{displaymath}
+\color{blue}
+\hat{\mu}_{ML}=\frac{1}{N}{\sum}^{N}_{n=1}t({x}_{n})
+\end{displaymath}
+
+}
+% 2-2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{Recap: asymptotic normality (AN)}
+Assume a sequence of RVs \small\{${X}_{n}$\small\} with mean ${\mu}_{n}$ and variance ${\sigma}_{n}^{2}$.  \small\{${X}_{n}$\small\} is asymptotically normal if
+\begin{displaymath}
+\frac{{X}_{n}-{\mu}_{n}}{{\sigma}_{n}} \xrightarrow{D} N(0,1)
+\end{displaymath}
+Intuition: as we get more and more data, averages of random variables behave like normally distributed random variables
+}
+% 2-3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{AN of MLE in exponential family: Poisson distribution example}
+\begin{displaymath}
+\color{blue}
+\hat{\mu}_{ML}=\frac{1}{N}{\sum}^{N}_{n=1}t({X}_{n})
+\end{displaymath}
+By the assumption ${X}_{i}$ are i.i.d., and since $t({X}_{i})$=${X}_{i}$\color{blue}
+(consequently, $\hat{\mu}_{ML}$=$\bar{{X}_{n}}$)
+\color{black}
+we can apply the iid version of the Central Limit Theorem directly to $\hat{\mu_{ML}}$. \\%To do this the only condition we need to verify (in addition to the data being iid) is that Var(Xi) < ?%
+Since $\mathbb{E}({X}_{i})$=$Var({X}_{i})$=$\theta$ < $\infty$ for all $\theta$ in the parameter space, it follows that
+\begin{displaymath}
+\sqrt{n}(\hat{\mu}_{ML}-\theta)/\sqrt{\theta}\xrightarrow{D} N(0,1)
+\end{displaymath}
+%How good this approximation is depends on n and ?, with the approximation improving as either n or ? becomes larger%
+}
+
+% 2-3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{AN of MLE in exponential family: general case}
+The proof for the general case is quite complicated. Here is the guideline:
+\begin{itemize}
+\item Continuous mapping theorem
+\item Central limit theorem
+\item Delta theorem
+\end{itemize} 
+
+
+For more details one can see: http://www.stat.purdue.edu/~dasgupta/mle.pdf
+}
+\end{document}
+
