@@ -1,0 +1,191 @@
+% Type of the document
+\documentclass{beamer}
+
+% elementary packages:
+\usepackage{graphicx}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{mathrsfs}
+\usepackage{url}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{ragged2e}
+
+% additional packages
+\usepackage{bbm}
+
+% packages supplied with ise-beamer:
+\usepackage{cooltooltips}
+\usepackage{colordef}
+\usepackage{beamerdefs}
+\usepackage{lvblisting}
+
+% Change the pictures here:
+% logobig and logosmall are the internal names for the pictures: do not modify them. 
+% Pictures must be supplied as JPEG, PNG or, to be preferred, PDF
+\pgfdeclareimage[height=2cm]{logobig}{hulogo}
+% Supply the correct logo for your class and change the file name to "logo". The logo will appear in the lower
+% right corner:
+\pgfdeclareimage[height=0.7cm]{logosmall}{Figures/logo.JPG}
+
+% Title page outline:
+% use this number to modify the scaling of the headline on title page
+\renewcommand{\titlescale}{1.0}
+% the title page has two columns, the following two values determine the percentage each one should get
+\renewcommand{\titlescale}{1.0}
+\renewcommand{\leftcol}{0.6}
+
+% Define the title.Don't forget to insert an abbreviation instead 
+% of "title for footer". It will appear in the lower left corner:
+\title[quiz9]{Quiz 9 of Selected Topics of Mathematical Statistics Seminar}
+% Define the authors:
+\authora{SIVAGOUROU Dinesh} % a-b
+\authorb{}
+\authorc{}
+
+% Define any internet addresses, if you want to display them on the title page:
+\def\linka{http://lvb.wiwi.hu-berlin.de}
+\def\linkb{}
+\def\linkc{}
+% Define the institute:
+\institute{Ladislaus von Bortkiewicz Chair of Statistics \\
+Humboldt--Universit{\"a}t zu Berlin \\}
+
+% Comment the following command, if you don't want, that the pdf file starts in full screen mode:
+%\hypersetup{pdfpagemode=FullScreen}
+
+%Start of the document
+\begin{document}
+
+% create the title slide, layout controlled in beamerdefs.sty and the foregoing specifications
+\frame[plain]{
+\titlepage
+}
+
+\section{}
+%1.1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame{
+\frametitle{Quiz}
+\justifying
+
+{\color{black} Let $\ X_n \xrightarrow{\ L} X $ and $ and \ Y_n  \xrightarrow{\ P} c $ where c is a finite constant . Then it holds :
+
+\begin{itemize}
+\item $ X_n + Y_n \xrightarrow{\ L} X + c $
+\item $ X_nY_n \xrightarrow{\ L} Xc $
+\item $ X_n/Y_n \xrightarrow{\ L} X/c $ if c $ \ne $ 0
+
+\end{itemize}
+
+}
+
+
+
+\textbf{Illustrate this theorem with some examples}
+
+
+
+}
+
+
+
+
+%1.2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\frame{
+\frametitle{Example 1}
+\justifying
+Let $\ X_n \sim  B(n,n/\lambda) $ . Then it holds $\lim\limits_{n \rightarrow +\infty} X_n \xrightarrow{\ L} X $  where $ \ X \sim  P(\lambda) $ 
+
+\
+
+\textbf{Proof :}
+
+$  P(X_n=x)=\dbinom{n}{x}(\frac{\lambda}{n})^x (1-\frac{\lambda}{n})^{n-x} $
+\
+
+$  =\frac{n(n-1)....(n-x+1)}{x!}(\frac{\lambda}{n})^x \frac{(1-\frac{\lambda}{n})^{n}}{(1-\frac{\lambda}{n})^{x}} $
+
+$  =\frac{\lambda^x}{x!}(1-\frac{1}{n})...(1-\frac{x-1}{n}) \frac{(1-\frac{\lambda}{n})^{n}}{(1-\frac{\lambda}{n})^{x}} $
+
+\
+
+$\lim\limits_{n \rightarrow +\infty} P(X_n=x) = \frac{\lambda^x}{x!} \lim\limits_{n \rightarrow +\infty} (1-\frac{\lambda}{n})^{n} = \frac{\lambda^x}{x!}e^{-\lambda}   $
+
+}
+
+%1.3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame{
+\frametitle{Example 1}
+\justifying
+Theorem :
+$\forall  c \in \mathbb{R} \ Y_n  \xrightarrow{\ P} c \Leftrightarrow \ Y_n  \xrightarrow{\ L} c	$
+
+\
+
+Let $\ X_n \sim  B(n,n/\lambda) $  and  $ Y_n \ defined \ by \ P(Y_n = d) = d - \frac{1}{n} $ .
+
+
+$X_n \xrightarrow{\ P} X $  where $ \ X \sim  P(\lambda) $ 
+
+$ Y_n \xrightarrow{\ P} d $
+
+
+}
+
+%1.4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+\frametitle{Example 2}
+\justifying
+
+$ \sqrt[]{n} \ ( \hat{\theta} - \theta)  \sim^{L} \mathcal{N}(0,\,\sigma^{2}(\theta)) $
+
+
+}
+
+\frame{
+\frametitle{Example 3}
+\justifying
+
+Let $ X_1 , X _2 , ... X_n $ a  sequence of i.i.d RV with $ E(X_i)=\mu , V(X_i)=\sigma^{2} < \infty $
+
+\
+
+Let  $ U_n= \sqrt[]{n} (\frac{X_n - \mu }{s_n})  $ 
+\ ,
+   $ C_n= \sqrt[]{n} (\frac{X_n - \mu }{\sigma})  $
+\ , $ D_n= \frac{\sigma}{s_n} $
+\ 
+
+\
+
+We have $ U_n = C_n D_n $ and since $  C_n  \xrightarrow{\ L} \mathcal{N}(0,1) $ according to Central Limit Theorem and $D_n  \xrightarrow{\ P} 1  $  according to weak law of large numbers
+
+\
+
+According to Slutsky's theorem we have $U_n  \xrightarrow{\ L} \mathcal{N}(0,1)  $
+
+
+
+
+}
+
+
+
+\end{document}
